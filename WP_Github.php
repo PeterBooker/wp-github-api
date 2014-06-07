@@ -620,7 +620,6 @@ if ( ! class_exists( 'WP_Github' ) ) {
 
                 } else {
 
-                    //return $response['code'] . ' - ' . $response['message'];
                     return $response['response'];
 
                 }
