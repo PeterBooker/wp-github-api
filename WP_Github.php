@@ -283,12 +283,12 @@ if ( ! class_exists( 'WP_Github' ) ) {
         /**
          * Gets the Profile of given Username.
          *
-         * @param $username
+         * @param $user
          * @return array|mixed
          */
-        public function get_user_profile( $username ) {
+        public function get_user_profile( $user ) {
 
-            $url = $this->api_url . 'users/' . $username;
+            $url = $this->api_url . 'users/' . $user;
 
             $response = $this->make_request( $url );
 
@@ -487,13 +487,19 @@ if ( ! class_exists( 'WP_Github' ) ) {
          *
          * @param string $owner
          * @param string $repo
+         * @param string $sha
+         * @param string $path
+         * @param string $author
          * @return array|mixed
          */
-        public function get_repo_commits( $owner, $repo ) {
+        public function get_repo_commits( $owner, $repo, $sha = null, $path = null, $author = null ) {
 
             $params = array(
                 'page' => $this->page,
                 'per_page' => $this->per_page,
+                'sha' => $sha,
+                'path' => $path,
+                'author' => $author,
                 'since' => $this->time_period['since'],
                 'until' => $this->time_period['until'],
             );
