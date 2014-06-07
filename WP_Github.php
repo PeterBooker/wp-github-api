@@ -92,6 +92,28 @@ if ( ! class_exists( 'WP_Github' ) ) {
         }
 
         /**
+         * Gets the Items per Page
+         *
+         * @return string
+         */
+        public function get_per_page() {
+
+            return $this->per_page;
+
+        }
+
+        /**
+         * Sets the Items per Page
+         *
+         * @param string $per_page
+         */
+        public function set_per_page( $per_page ) {
+
+            $this->per_page = $per_page;
+
+        }
+
+        /**
          * Gets the Page Number
          *
          * @return string
@@ -438,6 +460,7 @@ if ( ! class_exists( 'WP_Github' ) ) {
 
             $params = array(
                 'page' => $this->page,
+                'per_page' => $this->per_page,
                 'since' => $this->time_period['since'],
                 'until' => $this->time_period['until'],
             );
