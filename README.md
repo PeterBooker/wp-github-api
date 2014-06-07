@@ -14,7 +14,7 @@ A personal (oAuth) access token is used for authentication. You can find instruc
 
 Not all endpoints are supported yet, but most GET endpoints are planned. PUT and DELETE Endpoints will be considered if there is interest/demand. You can currently access the following methods:
 
-* get_user_profile( $user ) - *Gets the Profile of given Username.*
+* get_user_profile( $user ) - *Gets the Profile of given User.*
 
 * get_own_repos() - *List all Repos owned by the authenticated User.*
 
