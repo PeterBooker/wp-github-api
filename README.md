@@ -1,6 +1,6 @@
 # WP Github
 
-WP Github handles communication between WordPress and the Github API. It can be included in your theme/plugin or the /mu-plugins/ folder. It is designed to allow easy fetching of data from Github to use/display on your WordPress website.
+WP Github handles communication between WordPress and the Github API. It can be included in your theme/plugin or the /mu-plugins/ folder. It is designed to allow easy fetching of data from Github to use and/or display on your WordPress site.
 
 It is licensed under [GPL v2](http://www.gnu.org/licenses/gpl-2.0.html).
 
@@ -8,13 +8,14 @@ You can see more information about Github's v3 API here: https://developer.githu
 
 ## Authentication
 
-A personal (oAuth) access token is used for authentication, which you can get from your 'Account Settings -> Applications' page. It only requires the 'repo' and 'public_repo' scopes.
+A personal (oAuth) access token is used for authentication. You can find instructions on obtaining your token [here](https://github.com/blog/1509-personal-api-tokens). It only requires the 'repo' and 'public_repo' scopes.
 
 ## Supported Endpoints
 
 Not all endpoints are supported yet, but most GET endpoints are planned. PUT and DELETE Endpoints will be considered if there is interest/demand. You can currently access the following methods:
 
-* get_user_profile( $user ) - Gets the Profile of given Username.
+**get_user_profile( $user )**
+Gets the Profile of given Username.
 
 * get_own_repos() - List all Repos owned by the authenticated User.
 
