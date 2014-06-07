@@ -46,8 +46,16 @@ To get started check the examples below.
 
 ### Basic Example
 
+This basic example shows you how to fetch the details of your User Profile.
+
 ```php
 <?php
+
+$oauth_token = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
+
+$github = new WP_Github( $oauth_token );
+
+$response = $github->get_user_profile();
 
 print_r( $response );
 
@@ -56,8 +64,28 @@ print_r( $response );
 
 ### Advanced Example
 
+This advanced example shows you how to fetch the Commits for a particular Repository. It involves setting pagination options as well as a time period to return the data for and a timezone for that time period.
+
 ```php
 <?php
+
+$oauth_token = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
+
+$github = new WP_Github( $oauth_token );
+
+$github->set_page( 1 );
+
+$github->set_per_page( 100 );
+
+$github->set_timezone( 'Europe/London' );
+
+$github->set_time_period_until( date( 'Y-m-d' ), '3 months' );
+
+$owner = 'XXXXXXXXXX';
+
+$repo = 'XXXXXXXXXX';
+
+$response = $github->get_repo_commits( $owner, $repo );
 
 print_r( $response );
 
