@@ -40,12 +40,27 @@ if ( ! class_exists( 'WP_Github' ) ) {
         private $per_page = 30;
 
         /**
+         * Page Number
+         *
+         * @var int
+         */
+        private $page = 1;
+
+        /**
          * Timezone e.g. Europe/London
          * See full list: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
          *
          * @var string
          */
-        private $timezone;
+        private $timezone = 'UTC';
+
+        /**
+         * Time Period
+         * since - until
+         *
+         * @var array
+         */
+        private $time_period;
 
         /**
          * Custom WP HTTP API Args
@@ -77,6 +92,28 @@ if ( ! class_exists( 'WP_Github' ) ) {
         }
 
         /**
+         * Gets the Page Number
+         *
+         * @return string
+         */
+        public function get_page() {
+
+            return $this->page;
+
+        }
+
+        /**
+         * Sets the Page Number
+         *
+         * @param string $page
+         */
+        public function set_page( $page ) {
+
+            $this->page = $page;
+
+        }
+
+        /**
          * Gets the Timezone
          *
          * @return string
@@ -95,6 +132,94 @@ if ( ! class_exists( 'WP_Github' ) ) {
         public function set_timezone( $timezone ) {
 
             $this->timezone = $timezone;
+
+        }
+
+        /**
+         * Gets the Time Period
+         *
+         * @return array
+         */
+        public function get_time_period() {
+
+            return $this->time_period;
+
+        }
+
+        /**
+         * Sets the Time Period
+         *
+         * @param string $since
+         * @param string $until
+         */
+        public function set_time_period( $since = null, $until = null ) {
+
+            $this->timezone = array(
+                'since' => $since,
+                'until' => $until,
+            );
+
+        }
+
+        /**
+         * Helper - Set the Time Period using Since datetime and an Offset
+         * e.g. $since = '2014-06-07', $offset = '6 months'
+         *
+         * @param string $since
+         * @param string $offset
+         */
+        public function set_time_period_since( $since, $offset ) {
+
+            $until = new DateTime( $since, new DateTimeZone( $this->timezone ) );
+            $since = new DateTime( $since, new DateTimeZone( $this->timezone ) );
+
+            $since->modify( '+' . $this->sanitize_offset( $offset ) );
+
+            $this->time_period = array(
+                'since' => $since->format( 'c' ),
+                'until' => $until->format( 'c' ),
+            );
+
+        }
+
+        /**
+         * Helper - Set the Time Period using Until datetime and an Offset
+         * e.g. $since = '2014-04', $offset = '6 months'
+         *
+         * @param string $until
+         * @param string $offset
+         */
+        public function set_time_period_until( $until, $offset ) {
+
+            $since = new DateTime( $until, new DateTimeZone( $this->timezone ) );
+            $until = new DateTime( $until, new DateTimeZone( $this->timezone ) );
+
+            $since->modify( '-' . $this->sanitize_offset( $offset ) );
+
+            $this->time_period = array(
+                'since' => $since->format( 'c' ),
+                'until' => $until->format( 'c' ),
+            );
+
+        }
+
+        /**
+         * Sanitizes the Offset value to remove negative/positive operators.
+         *
+         * @param string $offset
+         * @return string
+         */
+        private function sanitize_offset( $offset ) {
+
+            if ( '-' == substr( $offset, 0, 1 ) || '+' == substr( $offset, 0, 1 ) ) {
+
+                return substr( $offset, 1 );
+
+            } else {
+
+                return $offset;
+
+            }
 
         }
 
@@ -208,9 +333,113 @@ if ( ! class_exists( 'WP_Github' ) ) {
          */
         public function get_repo( $owner, $repo ) {
 
-            $url = $this->api_url . '/repos/' . $owner . '/' . $repo . '';
+            $url = $this->api_url . '/repos/' . $owner . '/' . $repo;
 
             $response = $this->make_request( $url );
+
+            return $response;
+
+        }
+
+        /**
+         * List the Languages in given Repository.
+         *
+         * @param $owner
+         * @param $repo
+         * @return array|mixed
+         */
+        public function get_repo_languages( $owner, $repo ) {
+
+            $url = $this->api_url . '/repos/' . $owner . '/' . $repo . '/languages';
+
+            $response = $this->make_request( $url );
+
+            return $response;
+
+        }
+
+        /**
+         * List the Tags in given Repository.
+         *
+         * @param $owner
+         * @param $repo
+         * @return array|mixed
+         */
+        public function get_repo_tags( $owner, $repo ) {
+
+            $url = $this->api_url . '/repos/' . $owner . '/' . $repo . '/tags';
+
+            $response = $this->make_request( $url );
+
+            return $response;
+
+        }
+
+        /**
+         * List the Branches in given Repository.
+         *
+         * @param $owner
+         * @param $repo
+         * @return array|mixed
+         */
+        public function get_repo_branches( $owner, $repo ) {
+
+            $url = $this->api_url . '/repos/' . $owner . '/' . $repo . '/branches';
+
+            $response = $this->make_request( $url );
+
+            return $response;
+
+        }
+
+        /**
+         * Get the Branch by given Branch Name and Repository.
+         *
+         * @param $owner
+         * @param $repo
+         * @param $branch
+         * @return array|mixed
+         */
+        public function get_repo_branch( $owner, $repo, $branch ) {
+
+            $url = $this->api_url . '/repos/' . $owner . '/' . $repo . '/branches/' . $branch;
+
+            $response = $this->make_request( $url );
+
+            return $response;
+
+        }
+
+        /**
+         * List the Teams in given Repository.
+         *
+         * @param $owner
+         * @param $repo
+         * @return array|mixed
+         */
+        public function get_repo_teams( $owner, $repo ) {
+
+            $url = $this->api_url . '/repos/' . $owner . '/' . $repo . '/teams';
+
+            $response = $this->make_request( $url );
+
+            return $response;
+
+        }
+
+        public function get_repo_commits( $owner, $repo ) {
+
+            $params = array(
+                'page' => $this->page,
+                'since' => $this->time_period['since'],
+                'until' => $this->time_period['until'],
+            );
+
+            $url = $this->api_url . '/repos/' . $owner . '/' . $repo . '/commits?' . http_build_query( $params, '', '&amp;' );
+
+            $response = $this->make_request( $url );
+
+            echo $url;
 
             return $response;
 
