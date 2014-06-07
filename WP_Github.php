@@ -306,7 +306,15 @@ if ( ! class_exists( 'WP_Github' ) ) {
          */
         public function get_own_repos( $type = 'all', $sort = 'full_name', $direction = 'desc' ) {
 
-            $url = $this->api_url . '/user/repos';
+            $params = array(
+                'page' => $this->page,
+                'per_page' => $this->per_page,
+                'type' => $type,
+                'sort' => $sort,
+                'direction' => $direction,
+            );
+
+            $url = $this->api_url . '/user/repos?' . http_build_query( $params, '', '&amp;' );
 
             $response = $this->make_request( $url );
 
@@ -322,7 +330,12 @@ if ( ! class_exists( 'WP_Github' ) ) {
          */
         public function get_user_repos( $user ) {
 
-            $url = $this->api_url . '/users/' . $user . '/repos';
+            $params = array(
+                'page' => $this->page,
+                'per_page' => $this->per_page,
+            );
+
+            $url = $this->api_url . '/users/' . $user . '/repos?' . http_build_query( $params, '', '&amp;' );
 
             $response = $this->make_request( $url );
 
@@ -338,7 +351,12 @@ if ( ! class_exists( 'WP_Github' ) ) {
          */
         public function get_org_repos( $organization ) {
 
-            $url = $this->api_url . '/orgs/' . $organization . '/repos';
+            $params = array(
+                'page' => $this->page,
+                'per_page' => $this->per_page,
+            );
+
+            $url = $this->api_url . '/orgs/' . $organization . '/repos?' . http_build_query( $params, '', '&amp;' );
 
             $response = $this->make_request( $url );
 
@@ -389,7 +407,12 @@ if ( ! class_exists( 'WP_Github' ) ) {
          */
         public function get_repo_tags( $owner, $repo ) {
 
-            $url = $this->api_url . '/repos/' . $owner . '/' . $repo . '/tags';
+            $params = array(
+                'page' => $this->page,
+                'per_page' => $this->per_page,
+            );
+
+            $url = $this->api_url . '/repos/' . $owner . '/' . $repo . '/tags?' . http_build_query( $params, '', '&amp;' );
 
             $response = $this->make_request( $url );
 
@@ -406,7 +429,12 @@ if ( ! class_exists( 'WP_Github' ) ) {
          */
         public function get_repo_branches( $owner, $repo ) {
 
-            $url = $this->api_url . '/repos/' . $owner . '/' . $repo . '/branches';
+            $params = array(
+                'page' => $this->page,
+                'per_page' => $this->per_page,
+            );
+
+            $url = $this->api_url . '/repos/' . $owner . '/' . $repo . '/branches?' . http_build_query( $params, '', '&amp;' );
 
             $response = $this->make_request( $url );
 
@@ -441,7 +469,12 @@ if ( ! class_exists( 'WP_Github' ) ) {
          */
         public function get_repo_teams( $owner, $repo ) {
 
-            $url = $this->api_url . '/repos/' . $owner . '/' . $repo . '/teams';
+            $params = array(
+                'page' => $this->page,
+                'per_page' => $this->per_page,
+            );
+
+            $url = $this->api_url . '/repos/' . $owner . '/' . $repo . '/teams?' . http_build_query( $params, '', '&amp;' );
 
             $response = $this->make_request( $url );
 
@@ -490,6 +523,7 @@ if ( ! class_exists( 'WP_Github' ) ) {
                 'httpversion' => '1.1',
                 'headers' => array(
                     'Authorization' => 'token ' . $this->oauth_token,
+                    'Time-Zone' => $this->timezone,
                 ),
                 'body' => null,
             );
