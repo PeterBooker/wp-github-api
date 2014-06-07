@@ -16,29 +16,29 @@ Not all endpoints are supported yet, but most GET endpoints are planned. PUT and
 
 * get_user_profile( $user ) - *Gets the Profile of given Username.*
 
-* get_own_repos() - List all Repos owned by the authenticated User.
+* get_own_repos() - *List all Repos owned by the authenticated User.*
 
-* get_user_repos( $user ) - List all Repositories of given User.
+* get_user_repos( $user ) - *List all Repositories of given User.*
 
-* get_org_repos( $organization ) - List all Repositories of given Organization.
+* get_org_repos( $organization ) - *List all Repositories of given Organization.*
 
-* get_repo( $owner, $repo ) - Get Repository Information by given Owner and Repository.
+* get_repo( $owner, $repo ) - *Get Repository Information by given Owner and Repository.*
 
-* get_repo_languages( $owner, $repo ) - List the Languages in given Repository.
+* get_repo_languages( $owner, $repo ) - *List the Languages in given Repository.*
 
-* get_repo_tags( $owner, $repo ) - List the Tags in given Repository.
+* get_repo_tags( $owner, $repo ) - *List the Tags in given Repository.*
 
-* get_repo_branches( $owner, $repo ) - List the Branches in given Repository.
+* get_repo_branches( $owner, $repo ) - *List the Branches in given Repository.*
 
-* get_repo_branch( $owner, $repo, $branch ) - Get the Branch by given Branch Name and Repository.
+* get_repo_branch( $owner, $repo, $branch ) - *Get the Branch by given Branch Name and Repository.*
 
-* get_repo_teams( $owner, $repo ) - List the Teams in given Repository.
+* get_repo_teams( $owner, $repo ) - *List the Teams in given Repository.*
 
-* get_repo_commits( $owner, $repo ) - Lists the Commits by given Repository, Owner and optionally Time Period.
+* get_repo_commits( $owner, $repo ) - *Lists the Commits by given Repository, Owner and optionally Time Period.*
 
-* get_user_gists( $user, $since ) - List the Gists owned by given Username.
+* get_user_gists( $user, $since ) - *List the Gists owned by given Username.*
 
-* get_repo_issues( $owner, $repo ) - List the Issues by given Repository and Owner.
+* get_repo_issues( $owner, $repo ) - *List the Issues by given Repository and Owner.*
 
 ## Usage Examples
 
