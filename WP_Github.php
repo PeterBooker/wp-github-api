@@ -508,8 +508,6 @@ if ( ! class_exists( 'WP_Github' ) ) {
 
             $response = $this->make_request( $url );
 
-            echo $url;
-
             return $response;
 
         }
@@ -585,8 +583,6 @@ if ( ! class_exists( 'WP_Github' ) ) {
          * @return array|mixed
          */
         public function make_request( $url, $method = 'GET' ) {
-
-            echo $url;
 
             $default_args = array(
                 'method' => $method,
