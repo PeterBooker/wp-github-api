@@ -297,7 +297,7 @@ if ( ! class_exists( 'WP_Github' ) ) {
         }
 
         /**
-         * List all Repos owned by the authenticated user.
+         * List all Repos owned by the authenticated User.
          *
          * @param string $type
          * @param string $sort
