@@ -427,6 +427,13 @@ if ( ! class_exists( 'WP_Github' ) ) {
 
         }
 
+        /**
+         * Lists the Commits by given Repository, Owner and optionally Time Period.
+         *
+         * @param string $owner
+         * @param string $repo
+         * @return array|mixed
+         */
         public function get_repo_commits( $owner, $repo ) {
 
             $params = array(
