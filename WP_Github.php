@@ -509,6 +509,69 @@ if ( ! class_exists( 'WP_Github' ) ) {
         }
 
         /**
+         * List the Gists owned by given Username.
+         *
+         * @param string $user
+         * @param string $since
+         * @return array|mixed
+         */
+        public function get_user_gists( $user, $since ) {
+
+            $params = array(
+                'page' => $this->page,
+                'per_page' => $this->per_page,
+                'since' => $since,
+            );
+
+            $url = $this->api_url . '/users/' . $user . '/gists?' . http_build_query( $params, '', '&amp;' );
+
+            $response = $this->make_request( $url );
+
+            return $response;
+
+        }
+
+        /**
+         * List the Issues by given Repository and Owner.
+         *
+         * @param string $owner
+         * @param string $repo
+         * @param string|int $milestone
+         * @param string $state
+         * @param string $assignee
+         * @param string $creator
+         * @param string $mentioned
+         * @param string $labels
+         * @param string $sort
+         * @param string $direction
+         * @param string $since
+         * @return array|mixed
+         */
+        public function get_repo_issues( $owner, $repo, $milestone = null, $state = null, $assignee = null, $creator = null, $mentioned = null, $labels = null, $sort = null, $direction = null, $since = null ) {
+
+            $params = array(
+                'page' => $this->page,
+                'per_page' => $this->per_page,
+                'milestone' => $milestone,
+                'state' => $state,
+                'assignee' => $assignee,
+                'creator' => $creator,
+                'mentioned' => $mentioned,
+                'labels' => $labels,
+                'sort' => $sort,
+                'direction' => $direction,
+                'since' => $since,
+            );
+
+            $url = $this->api_url . '/repos/' . $owner . '/' . $repo . '/issues?' . http_build_query( $params, '', '&amp;' );
+
+            $response = $this->make_request( $url );
+
+            return $response;
+
+        }
+
+        /**
          * Make the HTTP Request
          *
          * @param string $url
@@ -516,6 +579,8 @@ if ( ! class_exists( 'WP_Github' ) ) {
          * @return array|mixed
          */
         public function make_request( $url, $method = 'GET' ) {
+
+            echo $url;
 
             $default_args = array(
                 'method' => $method,
