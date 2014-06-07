@@ -304,7 +304,7 @@ if ( ! class_exists( 'WP_Github' ) ) {
          * @param string $direction
          * @return array|mixed
          */
-        public function get_own_repos( $type = 'all', $sort = 'full_name', $direction = 'desc' ) {
+        public function get_own_repos( $type = null, $sort = null, $direction = null ) {
 
             $params = array(
                 'page' => $this->page,
