@@ -513,6 +513,28 @@ if ( ! class_exists( 'WP_Github' ) ) {
         }
 
         /**
+         * Get recent Commit Statistics by Hour.
+         *
+         * @param string $owner
+         * @param string $repo
+         * @return array|mixed
+         */
+        public function get_repo_stats_punch_card( $owner, $repo ) {
+
+            $params = array(
+                'page' => $this->page,
+                'per_page' => $this->per_page,
+            );
+
+            $url = $this->api_url . '/repos/' . $owner . '/' . $repo . '/stats/punch_card?' . http_build_query( $params, '', '&amp;' );
+
+            $response = $this->make_request( $url );
+
+            return $response;
+
+        }
+
+        /**
          * List the Gists owned by given Username.
          *
          * @param string $user
